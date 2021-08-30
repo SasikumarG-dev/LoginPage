@@ -1,0 +1,219 @@
+<html>
+    <head>
+        <title>LoginPage</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    </head>
+    <link type="text/css" rel="stylesheet" href="./style.css"/>
+    <body>
+        <div class="container">
+            
+            <div class="left">
+                <p>
+                    To keep  connected with us please login with your personal info
+                </p>
+            <input type="button" value="Sign In" class="signup" onclick="setvalue()">
+            </div>
+            
+            <div class="right">
+                <form >
+                    <form action="logindetails.html">
+                    <div class="form-group">
+                    <h3>Create Account</h3>
+                      <input type="text" onkeyup="onkeyname()" class="form-control name" id="name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                      <input type="email" onkeyup="onkeyemail()" class="form-control email" id="email" placeholder="Email">
+                      <label style="color:red;display: none;" id="emailvalid" class="emaillabel">*Enter valid email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" onkeyup="onkeypass()" class="form-control password" id="password" placeholder="Password">
+                        <label style="color:red;display: none;" id="passwordvalid" class="passlabel">*Should contain one lowecase, uppercase and number </label>
+                    </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control phonenumber" onkeypress="phone(event)" onkeyup="onkeyphone()" id="phonenumber" placeholder="phonenumber">
+                      </div>
+                      <div class="form-group">
+                        <h6>Gender</h6>
+                        <div class="gen">
+                            <input type="radio" name="gender" value="male" class="gender"/> Male
+                            <input type="radio" name="gender" value="female" class="gender"/> Female
+                            <input type="radio" name="gender" value="Others" class="gender"/> Others
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input type="file" class=" choosefile" onchange="image(event)" name="Your file" alt="Your image">
+                        <img id="previewimage" class="previewimage">
+                      </div>
+                      <div class="form-group">
+                        <input type="button" value="SIGN UP" class="sign" onclick="validateform()"/>
+                      </div>
+                    </form>
+                  </form>
+
+            </div>
+        </div>
+        
+
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    </body>
+</html>
+<script>
+
+    
+    function onkeyname(){
+        
+        var name= document.getElementById('name').value;
+        
+        if(name.length>0){
+            document.getElementById('name').style="border:none";
+            }
+            else{
+            document.getElementById('name').style="border-color:  red";
+        }
+        
+        
+        
+    }
+    function onkeyemail(){
+        var email=document.getElementById('email').value;
+        var regx= (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/  )
+        if(email){
+            var isemail=regx.test(email)
+            if(isemail){
+                 document.getElementById('email').style="border:none";
+                 document.getElementById('emailvalid').style="display:none";
+            } 
+            
+            if(email.length>0){
+                document.getElementById('email').style="border:none";
+            }
+        }
+        else{ 
+            document.getElementById('emailvalid').style="display:block;color: red";
+            document.getElementById('email').style="border-color:  red";
+        }
+    }
+    function onkeypass(){
+        var password=document.getElementById('password').value;
+        var pass=(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/)
+        if(password){
+            var ispass=pass.test(password)
+            if(ispass){
+                document.getElementById('password').style="border:none";
+                 document.getElementById('passwordvalid').style="display:none";
+            }
+            if(password.length>0){
+                document.getElementById('email').style="border:none";
+            }
+        }
+        else{
+            document.getElementById('passwordvalid').style="display:block;color: red";
+            document.getElementById('password').style="border-color:  red";
+        }
+
+}
+function onkeyphone(){
+    var phonenumber=document.getElementById('phonenumber').value;
+    var phn =/^\d{10}$/;
+        if(phonenumber.length>0){
+                document.getElementById('phonenumber').style="border:none";
+            }
+        else{
+            document.getElementById('phonenumber').style="border-color:  red";
+        }
+
+}
+    function validateform(){
+        const name= document.getElementById('name').value;
+        var email=document.getElementById('email').value;
+        var password=document.getElementById('password').value;
+        var phonenumber=document.getElementById('phonenumber').value; 
+        var count = 0; 
+        if(name){
+            count++;
+            document.getElementById('name').style="border:none";
+            sessionStorage.setItem("name1",name.charAt(0).toUpperCase() + name.slice(1));
+            
+        }
+        else{
+            document.getElementById('name').style="border-color:  red";
+        }
+        var email=document.getElementById('email').value;
+        var regx= (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/  )
+        if(email){
+            var isemail=regx.test(email)
+            if(isemail){
+                count++;
+                 document.getElementById('email').style="border:none";
+                 document.getElementById('emailvalid').style="display:none";
+            } 
+            else{ 
+            document.getElementById('emailvalid').style="display:block;color: red";
+            document.getElementById('email').style="border-color:  red";
+        }
+            
+        }
+        else{ 
+            document.getElementById('emailvalid').style="display:block;color: red";
+            document.getElementById('email').style="border-color:  red";
+        }
+        
+        var password=document.getElementById('password').value;
+        var pass=(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/)
+        var ispass=pass.test(password)
+        if(ispass){
+            
+            if(ispass){
+                count++;
+                document.getElementById('password').style="border:none";
+                 document.getElementById('passwordvalid').style="display:none";
+            }
+            if(password.length>0){
+                document.getElementById('email').style="border:none";
+            }
+        }
+        else{
+            document.getElementById('passwordvalid').style="display:block;color: red";
+            document.getElementById('password').style="border-color:  red";
+        }
+        if(phonenumber){
+                count++;
+                document.getElementById('phonenumber').style="border:none";
+            }
+        else{
+            document.getElementById('phonenumber').style="border-color:  red";
+        }
+        console.log('count',count);
+        if(count==4){
+            window.location.href="logindetails.html";
+
+        }
+    }
+   
+    function phone(evt){
+    var ch=String.fromCharCode(evt.which);
+    if(!(/[0-9]/.test(ch))){
+        evt.preventDefault();
+    }
+}
+function image(event){
+    var output=document.getElementById('previewimage');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src)
+      output.style.display="block";
+}
+}
+    
+
+    function setvalue(){
+        
+        window.location.href="signup.html";
+    }
+
+
+
+</script>
